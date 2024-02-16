@@ -2,6 +2,7 @@
 import pyglet
 import pyglet.window.key
 from pyglet import shapes
+from window import Window
 
 # 1024 x 768
 
@@ -19,7 +20,8 @@ def main():
     image_width = image.width
     image_height = image.height
     # creating a window
-    window = pyglet.window.Window(image_width, image_height, title)
+    # window = pyglet.window.Window(image_width, image_height, title)
+    window = Window(fullscreen=False)
 
     image_x = (window.width - image_width) // 2
     image_y = (window.height - image_height) // 2
@@ -29,8 +31,8 @@ def main():
     shape_list = []
     rectangle_list = []
 
-    width_factor = 12
-    height_factor = 11
+    width_factor = 12 # num cols
+    height_factor = 11 # num rows
 
     rect_width = (image_width // width_factor) + 1
     rect_height = (image_height // height_factor) + 1
@@ -49,14 +51,27 @@ def main():
         liney.opacity = 250
         shape_list.append(liney)
 
+    # Example usage
+    input_image_path = "images/seattle.png"
+    output_folder = "output_grid"
+    rows = height_factor
+    columns = width_factor
+
+    window.slice_image_into_grid(input_image_path, output_folder, rows, columns)
+
+    sprites = window.load_all_sprites("output_grid", rows, columns)
+
     # on draw event
     @window.event
     def on_draw(): 
         
         # clearing the window
         window.clear()
-        image.blit(image_x, image_y)
-        batch.draw()
+        # image.blit(image_x, image_y)
+        # batch.draw()
+
+        for sprite in sprites:
+            sprite.draw()
         
     # key press event 
     @window.event
@@ -84,7 +99,7 @@ def main():
     img = image = pyglet.resource.image("images/seattle.png")
     # # setting image as icon
     window.set_icon(img)
-                
+    
     # start running the application
     pyglet.app.run()
 
