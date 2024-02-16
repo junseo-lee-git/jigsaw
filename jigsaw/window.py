@@ -19,3 +19,5 @@ class Window(pyglet.window.Window):
         if self.piece.dragging:
             self.piece.sprite.x += dx
             self.piece.sprite.y += dy
+            self.piece.backdrop.x += dx
+            self.piece.backdrop.y += dy
