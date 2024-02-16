@@ -2,6 +2,7 @@
 import pyglet
 import pyglet.window.key
 from pyglet import shapes
+from window import Window
 
 # 1024 x 768
 
@@ -19,7 +20,9 @@ def main():
     image_width = image.width
     image_height = image.height
     # creating a window
-    window = pyglet.window.Window(image_width, image_height, title)
+    # window = pyglet.window.Window(image_width, image_height, title)
+
+    window = Window(fullscreen=True)
 
     image_x = (window.width - image_width) // 2
     image_y = (window.height - image_height) // 2
@@ -69,9 +72,9 @@ def main():
     # on mouse press event
     @window.event
     def on_mouse_press(x, y, button, modifiers):
-        
+
         # printing some message
-        print("Mouse button pressed")
+        # print("Mouse button pressed")
 
         # print rectangles on mouse press
         line1 = shapes.Line(x - rect_width/2, y - rect_height/2, x + rect_width/2, y - rect_height/2, width=3, color=(255, 0, 0), batch=batch)
@@ -84,6 +87,8 @@ def main():
     img = image = pyglet.resource.image("images/seattle.png")
     # # setting image as icon
     window.set_icon(img)
+
+
                 
     # start running the application
     pyglet.app.run()
