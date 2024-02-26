@@ -92,3 +92,33 @@ class Window(pyglet.window.Window):
             shape_list.append(liney)
 
         grid_batch.draw()
+
+        image = Image.open('images/puzzlepiece.png')
+        rotated0_image = image.resize((cell_width + 20, cell_height + 20))
+        rotated0_image.save("rotated0_piece.png")
+        rotated90_image = rotated0_image.rotate(90)
+        rotated90_image.save("rotated90_piece.png")
+        rotated180_image = rotated0_image.rotate(180)
+        rotated180_image.save("rotated180_piece.png")
+        rotated270_image = rotated0_image.rotate(270)
+        rotated270_image.save("rotated270_piece.png")
+
+        rotated0_image = pyglet.image.load("rotated0_piece.png")
+        rotated90_image = pyglet.image.load("rotated90_piece.png")
+        rotated180_image = pyglet.image.load("rotated180_piece.png")
+        rotated270_image = pyglet.image.load("rotated270_piece.png")
+        
+        i = 0
+        for piece in self.puzzle_pieces:
+            if i % 2 == 0:
+                shape = pyglet.sprite.Sprite(rotated0_image)
+            elif i % 2 == 1:
+                shape = pyglet.sprite.Sprite(rotated0_image)
+            elif i % 2 == 2:
+                shape = pyglet.sprite.Sprite(rotated0_image)
+            else:
+                shape = pyglet.sprite.Sprite(rotated0_image)
+            shape.x = piece.sprite.x - 20
+            shape.y = piece.sprite.y
+            shape.draw()
+            i+=1
