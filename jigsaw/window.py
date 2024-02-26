@@ -80,15 +80,15 @@ class Window(pyglet.window.Window):
         cell_height = self.image.height // self.rows
 
         # Draw horizontal lines
-        for i in range(1, self.rows):
+        for i in range(0, self.rows + 1):
             y = i * cell_height
-            linex = shapes.Line(0, y, self.image.width, y, width=3, color=(255, 255, 255), batch=grid_batch)
+            linex = shapes.Line(0, y, self.image.width-4, y, width=3, color=(255, 255, 255), batch=grid_batch)
             shape_list.append(linex)
             
         # Draw vertical lines
-        for j in range(1, self.columns):
+        for j in range(0, self.columns + 1):
             x = j * cell_width
-            liney = shapes.Line(x, 0, x, self.image.height, width=3, color=(255, 255, 255), batch=grid_batch)
+            liney = shapes.Line(x, 0, x, self.image.height-10, width=3, color=(255, 255, 255), batch=grid_batch)
             shape_list.append(liney)
 
         grid_batch.draw()

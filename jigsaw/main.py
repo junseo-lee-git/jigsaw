@@ -14,7 +14,7 @@ def main():
     columns = 12
     rows = 11
 
-    window = Window(rows, columns, width = image_width + 200, height = image_height-8, fullscreen=False)
+    window = Window(rows, columns, width = image_width + 325, height = image_height + 300, fullscreen=False)
 
     output_folder = "pieces_grid"
     window.slice_image_into_grid(image_path, output_folder, rows, columns)
