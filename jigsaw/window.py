@@ -14,6 +14,7 @@ class Window(pyglet.window.Window):
         self.rows = rows
         self.image = pyglet.resource.image("images/seattle.png")
         # self.piece = PuzzlePiece('images/pikachu.png', 300, 300)
+        self.onePiece = -1
 
     def setup_pieces(self, rows, columns):
         for i in range(rows):
@@ -30,8 +31,16 @@ class Window(pyglet.window.Window):
     def on_mouse_press(self, x, y, button, modifiers):
         if button == pyglet.window.mouse.LEFT:
             for piece in self.puzzle_pieces:
-                if piece.is_point_inside(x, y):
+                if piece.is_point_inside(x, y) and self.onePiece == -1:
                     piece.dragging = not piece.dragging
+                    self.onePiece = self.puzzle_pieces.index(piece) # set the onePiece to the index of the curr piece
+                elif piece.is_point_inside(x, y) and self.onePiece != self.puzzle_pieces.index(piece):
+                    # if clicking another piece, then ignore it
+                    pass
+                elif piece.is_point_inside(x, y) and self.onePiece == self.puzzle_pieces.index(piece):
+                    piece.dragging = not piece.dragging
+                    self.onePiece = -1
+
 
     def on_mouse_motion(self, x, y, dx, dy):
         for piece in self.puzzle_pieces:
